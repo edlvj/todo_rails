@@ -1,0 +1,4 @@
+$('#edit_prod_<%= @project_id %>').closeModal();
+
+ 
+$("#project_id_<%=  @project_id %>").replaceWith('<%= j (  render @projects.where("id= ?",@project_id) )%>');

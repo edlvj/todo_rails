@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="row">
+    <div class="col m12" id="projects_list">
+   
+<% @projects.each do |project| %>
+   <%= render project %>
+<% end %>
+       </div>
+  <div class="center-align">
+    <a class = "waves-effect btn" onclick ="$('#new_prod').openModal();" >ADD NEW PROJECT</a>
+    
+<div id="new_prod" class="modal">
+    <div class="modal-content">
+
+<%= form_for Project.new, remote: true, role: "form" do |f| %>
+<%= f.text_field :name, :placeholder => "Enter name for new project", :required => "required", :minlength => "2" %>
+<%= f.submit :class => "btn" %>
+<% end %>
+
+</div>
+  </div>
+  
+    </div>
+    </div>
+</div>
+
+<!-- logout button -->
+<div class="fixed-action-btn horizontal click-to-toggle" style="bottom: 45px; right: 24px;">
+   
+    <a class="btn-floating btn-large cyan lighten-2">
+      <i class="large material-icons">menu</i>
+    </a>
+
+    <ul>
+      <li>
+         <%= link_to destroy_user_session_path, :class => "btn-floating red darken-1" ,method: :delete do %>
+         <i class="material-icons">input</i>
+         <%	end %>
+       </li>
+    </ul>
+  </div>

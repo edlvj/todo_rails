@@ -1,0 +1,12 @@
+<%= form_for([@project, @project.task.build], remote: true) do |f| %>
+    <i class="material-icons">add</i>
+	<%= f.text_field :name, :placeholder => "Add new todo" , :style => "width: 75%;", :required => "required", :minlength => "2"%><br>
+    <i class=" material-icons">schedule</i>
+    <%= f.date_field :deadline, :class => "datepicker",:style => "width: 75%;"%>
+	<%= f.submit :class => "btn" %>
+<%end %>
+
+
+
+
+  

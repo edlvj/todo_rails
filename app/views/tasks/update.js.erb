@@ -1,0 +1,3 @@
+$('#edit_task_<%= @task.id %>').closeModal();
+
+$("#task_id_<%= @task.id %>").replaceWith('<%= j ( render @tasks.where("id= ?", @task.id), { project: Project.find(@project_id) }  )%>');

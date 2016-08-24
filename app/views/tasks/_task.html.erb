@@ -1,0 +1,65 @@
+<% if task.status == 1 %> 
+<li class="collection-item" id="task_id_<%= task.id %>" style="opacity:0.4;" data-id="<%= task.id %>" > 
+
+ <a "class" = "tooltipped", "data-position" = "left", "data-delay" = "50", "data-tooltip" = "Checked" >
+ <i class="material-icons" >done</i>
+ </a>
+<%= task.name %> 
+
+
+<% else %>
+<li class="collection-item" id="task_id_<%= task.id %>" data-id="<%= task.id %>" > 
+ <%= link_to complete_project_task_path(project, task.id), :class => "tooltipped", "data-position" => "left", "data-delay" => "50", "data-tooltip" => "Mark as Checked", method: :patch, remote: true do %>
+ <i class="material-icons" >done</i>
+ <%	end %>
+<%= task.name %> 
+
+<% end %>
+
+
+ 
+ <%= link_to project_task_path(project, task.id), :class => "secondary-content", remote: true, method: :delete do %>
+ <i class="material-icons">delete</i>
+ <% end %>
+ 
+ <a class = "secondary-content" onclick="$('#edit_task_<%= task.id %>').openModal();" >
+ <i class="material-icons">mode_edit</i>
+ </a>
+
+<!-- Dates --> 
+<% if task.deadline %>  
+
+     <% if task.deadline > Time.now%>
+ 
+     <%= link_to "", :class => "secondary-content tooltipped", "data-position" => "left", "data-delay" => "50", "data-tooltip" => task.deadline.strftime("%m/%d/%Y")  , remote: true do %>
+     <i class="material-icons">today</i>
+     <%	end %>
+ 
+     <% else %>
+
+     <%= link_to "", :class => "secondary-content tooltipped ",  "data-position" => "left", "data-delay" => "50", "data-tooltip" => "You late !", remote: true do %>
+     <i class="material-icons" style="color: red;">today</i>
+     <%	end %>
+
+     <% end %>
+
+<% end %>
+
+</li>
+
+
+<!-- Task update -->
+
+<div id="edit_task_<%= task.id %>" class="modal">
+    <div class="modal-content">
+     
+
+    <form action="<%= project_task_path(project, task.id) %>" accept-charset="UTF-8" data-remote="true" method="post">
+        <input name="utf8" type="hidden" value="?"><input type="hidden" name="_method" value="patch">
+        <input type="text" value="<%= task.name %>" required="required" minlength="2"  name="task[name]" id="task_name">
+        <input type="date" value="<%= task.deadline %>"  name="task[deadline]" id="task_deadline">
+        <input type="submit" name="commit" class="btn" value="Update Task" >
+    </form>
+
+</div>
+</div>

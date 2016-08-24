@@ -1,0 +1,3 @@
+$('#task_name').val("");
+$('#list_project_<%= @project_id %>').append("<%= j (render @task, { project: Project.find(@project_id) } ) %>");
+
