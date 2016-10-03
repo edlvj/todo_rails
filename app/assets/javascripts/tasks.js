@@ -22,7 +22,7 @@ ready = function(){
         set_positions();
 
         // populate the updated_order array with the new task positions
-        $('.collection-item').each(function(i){
+        $('.list-group-item').each(function(i){
             updated_order.push({ id: $(this).data("id"), position: i+1 });
         });
 

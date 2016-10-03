@@ -1,18 +1,17 @@
 <div class="container">
-<div class="row">
-<div class= "col m12">
-<h2>Log in</h2>
- <div class="row">
+
+<h2 class="text-center">Log in</h2>
+
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="input-field col s12">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <div class="form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email, autofocus: true, :class => "form-control" %>
   </div>
 
-   <div class="input-field col s12">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+   <div class="form-group">
+    <%= f.label :password %>
+    <%= f.password_field :password, autocomplete: "off", :class => "form-control" %>
   </div>
 
   <% if devise_mapping.rememberable? -%>
@@ -22,7 +21,6 @@
     </div>
   <% end -%>
 
- </div>
 
   <div class="actions">
     <%= f.submit "Log in",  :class => "btn" %>
@@ -32,6 +30,5 @@
 
 
 <%= render "devise/shared/links" %>
-</div>
-</div>
+
 </div>

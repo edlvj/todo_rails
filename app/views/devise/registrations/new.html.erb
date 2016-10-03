@@ -1,29 +1,27 @@
-<div class="container">
-<div class="row">
-<div class= "col m12">
 
-<h2>Sign up</h2>
-<div class="row">
+<div class="container">
+<h2 class="text-center" >Sign up</h2>
+
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="input-field col s12">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+  <div class="form-group">
+    <%= f.label :email,  :for => "user_email" %>
+    <%= f.email_field :email, autofocus: true, :class => "form-control" %>
   </div>
 
-   <div class="input-field col s12">
-    <%= f.label :password %>
+   <div class="form-group">
+    <%= f.label :password, :for => "user_password" %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off" , :class => "form-control"%>
   </div>
 
-  <div class="input-field col s12">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  <div class="form-group">
+    <%= f.label :password_confirmation, :for => "user_password_confirmation" %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", :class => "form-control"  %>
   </div>
 
 
@@ -32,9 +30,9 @@
   </div>
 <% end %>
  
- </div>
- 
+
  <%= render "devise/shared/links" %>
-</div>
-</div>
-</div>
+  </div>
+
+
+

@@ -1,5 +1,6 @@
-$('#new_prod').closeModal();
+$("#new_prod").modal('hide'); 
  
 $('#project_name').val("");
+
 $('#projects_list').append("<%= j (render @project) %>");
 

@@ -6,6 +6,98 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+<style>
+.sortable {
+    display: block;
+}
+
+
+
+.row.project {
+    background-color: #4371ae;
+    padding: 15px 10px 10px 10px;
+    margin: 0px;
+}
+
+.row.task {
+    background-color: #d4d4d4;
+    padding: 15px 10px 10px 10px;
+    margin: 0px;
+}
+
+.grey-blue {
+    color: #99b1d3;
+}
+
+.grey {
+    color: grey;
+}
+
+
+.verticalLine {
+    border-left: thick solid #ff0000;
+}
+
+.col-md-1.first {
+    width: 3%;
+   
+}
+
+.icon-top {
+   padding-top: 9px;  
+}
+.col-md-9.second {
+    width: 89%;
+}
+
+.icon-plus {
+    font-size: 24px;
+    color: #589071;
+} 
+
+#task_name {
+    width:100%;
+    padding:5px;
+}
+
+.create_task {
+     width:100%;
+     padding:5px 100px 5px 45px ;
+     background: #6ca384;
+     border: 2px solid #52896a;
+     color:white;
+     border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.col-md-10.form {
+    padding-right:0px;
+}
+
+.col-md-1.form_button {
+    padding-left:0px;
+}
+
+.icons-task {
+    padding-left: 10px;
+    padding-right: 10px;
+    
+}
+.colons {
+    border-right: 1px solid gray;
+    border-left: 1px solid gray;
+}
+
+.one-colons {
+    border-right: 1px solid gray;
+     padding-right: 10px;
+}
+
+
+
+
+</style>
+
 <body>
 
 <%= yield %>

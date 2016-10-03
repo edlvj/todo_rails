@@ -1,10 +1,18 @@
-<%= form_for([@project, @project.task.build], remote: true) do |f| %>
-    <i class="material-icons">add</i>
-	<%= f.text_field :name, :placeholder => "Add new todo" , :style => "width: 75%;", :required => "required", :minlength => "2"%><br>
-    <i class=" material-icons">schedule</i>
-    <%= f.date_field :deadline, :class => "datepicker",:style => "width: 75%;"%>
-	<%= f.submit :class => "btn" %>
-<%end %>
+<%= form_for([@project, @project.task.build], remote: true, :class => "col-md-12") do |f| %>
+    <div class="row task">
+        <div class="col-md-1 col-sm-1 first">
+        <span  class="glyphicon glyphicon-plus icon-plus"></span>
+       </div>
+        
+        <div class="col-md-10 col-sm-10 form" >
+    	<%= f.text_field :name, :placeholder => "Start typing here to create task.." , :required => "required", :minlength => "2" %>
+    	</div>
+    	
+    	<div class="col-md-1 col-sm-1 form_button">
+	   <%= f.submit :class => "create_task", :value => "Add Task"  %>
+	   </div>
+<% end %>
+</div>
 
 
 

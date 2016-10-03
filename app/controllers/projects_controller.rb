@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
     # POST /projects.json
     def create
     @project = Project.new(project_params)
-    @project.user_id=current_user.id
+    @project.user_id = current_user.id
 
     respond_to do |format|
       
@@ -32,12 +32,12 @@ class ProjectsController < ApplicationController
     # DELETE /projects/1
     # DELETE /projects/1.json
     def destroy
+   
     @project.task.each do |task|
     task.destroy
     end
     
     @project.destroy
-    @project_id=@project.id
    
     respond_to do |format|
       format.html { redirect_to root_url}
@@ -51,8 +51,6 @@ class ProjectsController < ApplicationController
     # PATCH/PUT /projects/1
     # PATCH/PUT /projects/1.json
     def update
-      
-    @project_id=@project.id
     
     respond_to do |format|
       if @project.update(project_params)
@@ -71,21 +69,21 @@ class ProjectsController < ApplicationController
     
   # PUT /projects/priority
 	 def priority
-	    #pp params[:each]
-	    params[:order].each do |key,value|
-      Task.find(value[:id]).update_attribute(:priority,value[:position])
+	    
+	  params[:order].each do |key,value|
+      Task.find(value[:id]).update_attribute(:priority, value[:position])
     end
      render :nothing => true
 	end    
     
-    private
+  private
     
-    def set_project
-      @project = Project.find(params[:id])
-    end
+  def set_project
+      @project = Project.where("user_id = ?",current_user.id).find(params[:id])
+  end
     
-     def project_params
+  def project_params
       params.require(:project).permit(:name)
-    end
+  end
 
 end

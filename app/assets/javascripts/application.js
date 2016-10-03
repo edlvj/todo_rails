@@ -14,7 +14,8 @@
 //= require jquery_ujs
 //= require jquery-ui.min
 //= require html.sortable
-//= require materialize
+//= require bootstrap-sprockets
+//= require bootstrap-datetimepicker
 //= require turbolinks
 //= require_tree .
 

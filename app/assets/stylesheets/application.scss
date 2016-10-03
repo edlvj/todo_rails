@@ -14,9 +14,8 @@
  *= require_self
  */
  
-@import "materialize";
-@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+@import "bootstrap-sprockets";
 
-body {
- background: url('/assets/background.png') no-repeat;   
-}
+@import "bootstrap";
+
+@import 'bootstrap-datetimepicker';

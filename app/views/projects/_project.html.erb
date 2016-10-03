@@ -1,42 +1,80 @@
 
-<div class="card"  id="project_id_<%= project.id %>">
-  
-  <!-- Project -->
-  <div class="card-panel teal lighten-2 center">
-    <h2><%= project.name %></h2>
-    
-     <%= link_to "", :onclick => "$('#edit_prod_#{ project.id }').openModal();" , remote: true do %>
-     <i class="material-icons">mode_edit</i>
-     <% end %>
-    
-     <%= link_to project_path(project), remote: true, method: :delete do %>
-     <i class="material-icons">delete</i>
-     <%	 end %>
-    
+<div class="container"  id="project_id_<%= project.id %>">
+  <div class="row project" >
+      
+      <div class= "col-md-1  col-sm-1 first icon-top">
+        <span class="glyphicon glyphicon-calendar"></span>
+      </div>
+          
+      <div class= "col-md-9 col-sm-1 second">
+        <h5 style="color:white; font-size: 17px;"  ><b><%= project.name %></b></h5>
+      </div>
+           
+      <div class= "col-md-1 col-sm-1 first icon-top ">
+        <a data-toggle="modal" data-target="#edit_prod_<%= project.id  %>" >
+        <i class="glyphicon glyphicon-pencil grey-blue one-colons"></i>
+        </a>
+      </div>
+
+      <div class= "col-md-1 first icon-top">
+        <%= link_to project_path(project), remote: true, method: :delete do %>
+        <i class="glyphicon glyphicon-trash grey-blue"></i>
+        <% end %>
+      </div>
+           
   </div>
+
+
 
   <!-- Add Task -->
   <%= render "tasks/form" , { project: @project = Project.find(project.id) }%>
- 
+
   <!-- Tasks -->
-  <ul class="collection sortable"  id="list_project_<%= project.id %>" >
+  <ul class="list-group sortable"  id="list_project_<%= project.id %>" >
     
     <% Project.find(project.id).task.each do |task| %>
+    
     <%= render task, { project: Project.find(project.id) } %>
-    <% end %>
-  </ul>
+
+   
+  <% end %>
+  </ul> 
   
 </div>
 
 
 <!-- update project  -->
-<div id="edit_prod_<%= project.id %>" class="modal">
-    <div class="modal-content">
-        
-    <%= form_for @project, remote: true, method: :patch do |f| %>
-	<%= f.text_field :name, :value => project.name , :required => "required", :minlength => "2" %><br>
-	<%= f.submit :class => "btn", :value => "Update Project" %>
-    <%end %>
 
-</div>
-</div>
+<div class="modal fade" id="edit_prod_<%= project.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ 
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Project Update</h4>
+      </div>
+      <div class="modal-body">
+
+          
+    <%= form_for @project, remote: true, method: :patch do |f| %>
+   
+    <div class="form-group">
+   	<%= f.text_field :name, :value => project.name , :class => "form-control" , :required => "required", :minlength => "2" %>
+	  </div>
+
+  	<%= f.submit :class => "btn", :value => "Update Project" %>
+    <%end %>
+    </form>
+     
+      </div>
+    </div>
+  </div>
+</div>  
+
+
+
+
+
+

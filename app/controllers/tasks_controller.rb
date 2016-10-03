@@ -2,43 +2,36 @@ class TasksController < ApplicationController
     before_action :set_project
     before_action :set_task, except: [:create]
     
-    # POST   /projects/:project_id/tasks
-    # POST   /projects/:project_id/tasks.json
+  # POST   /projects/:project_id/tasks
+  # POST   /projects/:project_id/tasks.json
+  
+  
   def create
 	@task = @project.task.create(task_params)
-	
-	@project_id = @project.id
-    
     respond_to do |format|
       format.html{redirect_to @project, @task}
       format.js
     end
-    
-	end
+  end
 	
 	
 	#DELETE /projects/:project_id/tasks/:id
 	#DELETE /projects/:project_id/tasks/:id.json
 	def destroy
 	@task = @project.task.find(params[:id])
-	@task_id = @task.id
   @task.destroy
       
     respond_to do |format|
       format.html{ redirect_to @project}
       format.js
     end  
-	    
 	end
 	
 	#PATCH /projects/:project_id/tasks/:id
 	#PATCH /projects/:project_id/tasks/:id.json
-	
 	def update 
-	 
 	  @tasks = Task.all
-	  @project_id = @project.id
-   
+	  
     respond_to do |format|
     if @task.update(task_params)
         format.html { redirect_to @project}
@@ -48,7 +41,6 @@ class TasksController < ApplicationController
         format.js
       end
     end 
-	 
 	end    
     
   # PATCH /projects/:project_id/tasks/:id/complete
@@ -59,13 +51,13 @@ class TasksController < ApplicationController
       format.html{ redirect_to @project}
       format.js
     end
-	end
+  end
 	
 
-    private
+  private
     
-    def set_project
-		@project = Project.find(params[:project_id])
+  def set_project
+		@project = Project.where("user_id = ?", current_user.id).find(params[:project_id])
 	end
 	
 	def set_task
