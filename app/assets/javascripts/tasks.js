@@ -9,9 +9,7 @@ set_positions = function(){
 }
 
 ready = function(){
-    
     set_positions();
-    
     $('.sortable').sortable();
     
     
@@ -26,8 +24,6 @@ ready = function(){
             updated_order.push({ id: $(this).data("id"), position: i+1 });
         });
 
-
-
         // send the updated order via ajax
         $.ajax({
             type: "PUT",
@@ -36,8 +32,6 @@ ready = function(){
         });
     });
 }
-
-    
 
 $(document).ready(ready);
 

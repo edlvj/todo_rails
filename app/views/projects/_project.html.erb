@@ -1,17 +1,15 @@
-
 <div class="container"  id="project_id_<%= project.id %>">
-  <div class="row project" >
-      
-      <div class= "col-md-1  col-sm-1 first icon-top">
+  <div class="row project">
+      <div class= "col-md-1 col-sm-1 first icon-top">
         <span class="glyphicon glyphicon-calendar"></span>
       </div>
           
       <div class= "col-md-9 col-sm-1 second">
-        <h5 style="color:white; font-size: 17px;"  ><b><%= project.name %></b></h5>
+        <h5 style="color:white; font-size: 17px;" ><b><%= project.name %></b></h5>
       </div>
            
-      <div class= "col-md-1 col-sm-1 first icon-top ">
-        <a data-toggle="modal" data-target="#edit_prod_<%= project.id  %>" >
+      <div class= "col-md-1 col-sm-1 first icon-top">
+        <a data-toggle="modal" data-target="#edit_prod_<%= project.id %>" >
         <i class="glyphicon glyphicon-pencil grey-blue one-colons"></i>
         </a>
       </div>
@@ -21,57 +19,18 @@
         <i class="glyphicon glyphicon-trash grey-blue"></i>
         <% end %>
       </div>
-           
   </div>
-
-
-
-  <!-- Add Task -->
-  <%= render "tasks/form" , { project: @project = Project.find(project.id) }%>
-
-  <!-- Tasks -->
-  <ul class="list-group sortable"  id="list_project_<%= project.id %>" >
-    
-    <% Project.find(project.id).task.each do |task| %>
-    
-    <%= render task, { project: Project.find(project.id) } %>
-
-   
-  <% end %>
-  </ul> 
   
+  <%= render "tasks/form", project: project %>
+  
+  <ul class="list-group sortable"  id="list_project_<%= project.id %>" >
+    <% project.task.each do |task| %>
+      <%= render task %>
+    <% end %>
+  </ul> 
 </div>
 
-
-<!-- update project  -->
-
-<div class="modal fade" id="edit_prod_<%= project.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
- 
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Project Update</h4>
-      </div>
-      <div class="modal-body">
-
-          
-    <%= form_for @project, remote: true, method: :patch do |f| %>
-   
-    <div class="form-group">
-   	<%= f.text_field :name, :value => project.name , :class => "form-control" , :required => "required", :minlength => "2" %>
-	  </div>
-
-  	<%= f.submit :class => "btn", :value => "Update Project" %>
-    <%end %>
-    </form>
-     
-      </div>
-    </div>
-  </div>
-</div>  
+<%= render 'projects/update_form', project: project %>
 
 
 

@@ -1,0 +1,22 @@
+<div class="modal fade" id="new_prod" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Add new Project</h4>
+      </div>
+      
+      <div class="modal-body">
+       <%= form_for project_new_helper , remote: true, role: "form" do |f| %>
+         <div class="form-group">
+         <%= f.text_field :name, :placeholder => "Enter name for new project", :required => "required", :class => "form-control" ,:minlength => "2" %>
+         </div>
+       <%= f.submit :class => "btn", :value => "Add Project" %>
+       <% end %>
+      </div>
+      
+    </div>
+  </div>
+</div>   

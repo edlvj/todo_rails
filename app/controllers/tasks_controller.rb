@@ -1,39 +1,28 @@
 class TasksController < ApplicationController
-    before_action :set_project
-    before_action :set_task, except: [:create]
-    
-  # POST   /projects/:project_id/tasks
-  # POST   /projects/:project_id/tasks.json
-  
-  
+  before_action :set_project
+  before_action :set_task, except: [:create]
+
   def create
-	@task = @project.task.create(task_params)
+	  @task = @project.task.create(task_params)
     respond_to do |format|
       format.html{redirect_to @project, @task}
       format.js
     end
   end
 	
-	
-	#DELETE /projects/:project_id/tasks/:id
-	#DELETE /projects/:project_id/tasks/:id.json
 	def destroy
-	@task = @project.task.find(params[:id])
-  @task.destroy
-      
-    respond_to do |format|
-      format.html{ redirect_to @project}
-      format.js
+    if @task.destroy
+      respond_to do |format|
+        format.html{ redirect_to @project}
+        format.js
+      end 
     end  
 	end
 	
-	#PATCH /projects/:project_id/tasks/:id
-	#PATCH /projects/:project_id/tasks/:id.json
 	def update 
 	  @tasks = Task.all
-	  
     respond_to do |format|
-    if @task.update(task_params)
+      if @task.update(task_params)
         format.html { redirect_to @project}
         format.js
       else
@@ -43,7 +32,6 @@ class TasksController < ApplicationController
     end 
 	end    
     
-  # PATCH /projects/:project_id/tasks/:id/complete
   def complete
     @task.update_attribute(:status, 1)
 		
@@ -53,9 +41,7 @@ class TasksController < ApplicationController
     end
   end
 	
-
-  private
-    
+	private
   def set_project
 		@project = Project.where("user_id = ?", current_user.id).find(params[:project_id])
 	end
@@ -67,5 +53,4 @@ class TasksController < ApplicationController
 	def task_params
 		params[:task].permit(:name, :deadline)
 	end
-    
 end

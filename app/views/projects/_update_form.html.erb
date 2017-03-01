@@ -1,0 +1,21 @@
+<div class="modal fade" id="edit_prod_<%= project.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+       <h4 class="modal-title" id="myModalLabel">Project Update</h4>
+      </div>
+    
+    <div class="modal-body">
+    <%= form_for project, remote: true, method: :patch do |f| %>
+      <div class="form-group">
+      <%= f.text_field :name, :value => project.name , :class => "form-control" , :required => "required", :minlength => "2" %>
+      </div>
+  	<%= f.submit :class => "btn", :value => "Update Project" %>
+    <%end %>
+    </div>
+    </div>
+  </div>
+</div> 

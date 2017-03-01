@@ -1,3 +1,2 @@
 $("#edit_prod_<%= @project.id %>").modal('hide'); 
-
 $("#project_id_<%= @project.id %>").replaceWith('<%= j (  render @projects.where("id= ?",@project.id) )%>');

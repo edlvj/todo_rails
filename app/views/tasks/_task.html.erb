@@ -1,102 +1,26 @@
-
-<% if task.status? %> 
-
-<li class="list-group-item" id="task_id_<%= task.id %>" data-id="<%= task.id %>" style="opacity:0.4"> 
-      <div class="row">
-
-         <div class="col-md-1 col-sm-1">  
-            <%= link_to complete_project_task_path(project, task.id), method: :patch, remote: true do %>
-            <input type="checkbox" value="check" id="task_checked_<%= task.id %>" checked>
-            <% end %>
-         </div>
+<li class="list-group-item" id="task_id_<%= task.id %>" data-id="<%= task.id %>" style="<%= "opacity:0.4" if task.status? %>"> 
+ <div class="row">
+    <div class="col-md-1 col-sm-1">  
+        <%= link_to complete_project_task_path(task.project, task) , method: :patch, remote: true do %>
+         <%= check_box_tag 'task_checked_#{ task.id }', 'check', task.status? ? true : false %>
+        <% end %>
+    </div>
          
-         <div class="col-md-9 col-sm-9"> 
-           <%= task.name %> 
-         </div>
-
-         <div class="col-md-2 col-sm-2">
-           <a class="icons-task" > <i class="glyphicon glyphicon-sort grey" ></i></a>
-           
-           <a data-toggle="modal" data-target="#edit_task_<%= task.id %>" class="icons-task colons" >
-             <i class="glyphicon glyphicon-pencil grey"></i>
-           </a>
-
-          <%= link_to project_task_path(project, task.id), remote: true, method: :delete, :class => "icons-task" do %>
-          <i class="glyphicon glyphicon-trash grey"></i>
-          <% end %>
-          
-       </div>
- 
-     </div>
-   </li>
-   
-   <% else %>
-   
-   <li class="list-group-item" id="task_id_<%= task.id %>" data-id="<%= task.id %>" > 
-      <div class="row">
-
-         <div class="col-md-1 col-sm-1">  
-            <%= link_to complete_project_task_path(project, task.id), method: :patch, remote: true do %>
-            <input type="checkbox" value="check" id="task_checked_<%= task.id %>">
-             <% end %>
-         </div>
-         
-         <div class="col-md-9 col-sm-9"> 
-           <%= task.name %> 
-         </div>
-       
-        
-       
-
-         <div class="col-md-2 col-sm-2">
-           <a class="icons-task" > <i class="glyphicon glyphicon-sort grey" ></i></a>
-           
-           <a data-toggle="modal" data-target="#edit_task_<%= task.id %>" class="icons-task colons" >
-             <i class="glyphicon glyphicon-pencil grey"></i>
-           </a>
-
-          <%= link_to project_task_path(project, task.id), remote: true, method: :delete, :class => "icons-task" do %>
-          <i class="glyphicon glyphicon-trash grey"></i>
-          <% end %>
-          
-       </div>
- 
-     </div>
-   </li>
-   
-
- <% end %>    
-
-
-
- <!-- Task update -->
- 
-<div class="modal fade" id="edit_task_<%= task.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Edit Task</h4>
-      </div>
-      <div class="modal-body">
-
-    <form action="<%= project_task_path(project, task.id) %>" accept-charset="UTF-8" data-remote="true" method="patch">
-
-
-        <div class="form-group">
-        <input type="text" value="<%= task.name %>" required="required" minlength="2"  name="task[name]" id="task_name">
-        </div>
-        
-        <div class="form-group">
-        <input type="date" value="<%= task.deadline %>"  name="task[deadline]" id="task_deadline">
-        </div>
-        
-        <input type="submit" name="commit" class="btn" value="Update Task" >
-    </form>
-     
-      </div>
+    <div class="col-md-9 col-sm-9"> 
+      <%= task.name %> 
+    </div>
+    
+    <div class="col-md-2 col-sm-2">
+       <a class="icons-task" > <i class="glyphicon glyphicon-sort grey" ></i></a>
+        <a data-toggle="modal" data-target="#edit_task_<%= task.id %>" class="icons-task colons" >
+         <i class="glyphicon glyphicon-pencil grey"></i>
+        </a>
+      
+      <%= link_to project_task_path(task.project, task), remote: true, method: :delete, :class => "icons-task" do %>
+      <i class="glyphicon glyphicon-trash grey"></i>
+      <% end %>
     </div>
   </div>
-</div>  
+</li>
+
+<%= render 'tasks/update_form', task: task %>

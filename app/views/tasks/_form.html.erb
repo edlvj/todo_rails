@@ -1,18 +1,18 @@
-<%= form_for([@project, @project.task.build], remote: true, :class => "col-md-12") do |f| %>
+<%= form_for(task_new_helper, url: project_tasks_path(project), remote: true, method: :post, :class => "col-md-12") do |f| %>
     <div class="row task">
         <div class="col-md-1 col-sm-1 first">
-        <span  class="glyphicon glyphicon-plus icon-plus"></span>
-       </div>
+          <span class="glyphicon glyphicon-plus icon-plus"></span>
+        </div>
         
         <div class="col-md-10 col-sm-10 form" >
-    	<%= f.text_field :name, :placeholder => "Start typing here to create task.." , :required => "required", :minlength => "2" %>
+    	  <%= f.text_field :name, :placeholder => "Start typing here to create task.." , :required => "required", :minlength => "2" %>
     	</div>
     	
     	<div class="col-md-1 col-sm-1 form_button">
-	   <%= f.submit :class => "create_task", :value => "Add Task"  %>
-	   </div>
-<% end %>
-</div>
+	      <%= f.submit :class => "create_task", :value => "Add Task"  %>
+	    </div>
+    </div>
+ <% end %>    
 
 
 
